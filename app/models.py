@@ -29,7 +29,7 @@ class Product(GenereteCode):
     name: str = models.CharField(max_length=255)
     quantity: int = models.PositiveIntegerField(default=1)
     price: float = models.DecimalField(max_digits=8, decimal_places=2)
-    category: Category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    # category: Category = models.ForeignKey(Category, on_delete=models.CASCADE)
     description: str = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

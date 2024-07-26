@@ -8,46 +8,35 @@
     <form method="post">
       {% csrf_token %}
       <label for="name">Nomi:</label>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        value="{{ product.name|default_if_none:'' }}"
-      />
+      <input type="text" id="name" name="name" value="{{ product.name}}" />
       <br />
       <label for="name">Category:</label>
-      <input
-        type="text"
-        id="name"
-        name="category"
-        value="{{ product.category|default_if_none:'' }}"
-      />
+      <select name="category_id" id="">
+        {% for categor in category %}
+        <option value="{{category.id}}">{{category.name}}</option>
+        {% endfor %}
+      </select>
       <br />
       <label for="description">Tavsifi:</label>
       <textarea id="description" name="description">
-{{ product.description|default_if_none:'' }}</textarea
+{{ product.description }}</textarea
       >
       <br />
       <label for="price">Narxi:</label>
-      <input
-        type="text"
-        id="price"
-        name="price"
-        value="{{ product.price|default_if_none:'' }}"
-      />
+      <input type="text" id="price" name="price" value="{{ product.price }}" />
       <br />
       <label for="price">Miqdori:</label>
       <input
         type="text"
         id="price"
         name="quantity"
-        value="{{ product.quantity|default_if_none:'' }}"
+        value="{{ product.quantity }}"
       />
       <br />
 
       <br />
       <button type="submit">Saqlash</button>
     </form>
-    <a href="{% url 'product_list' %}">Orqaga</a>
+    <a href="{% url 'home' %}">Orqaga</a>
   </body>
 </html>

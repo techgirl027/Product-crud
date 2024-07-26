@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from django.shortcuts import render, redirect
-from .models import Product
+from .models import Product, ProductEnter, Category
 
 
 # Mahsulotlar ro'yxati
-def product_list(request):
+def home(request):
     products = Product.objects.all()
     context = {
         "products": products,
@@ -12,28 +12,26 @@ def product_list(request):
     return render(request, "home.html", context)
 
 
-# Mahsulot qo'shish
-def product_create(request):
+def create(request):
     if request.method == "POST":
         name = request.POST["name"]
         description = request.POST["description"]
         price = request.POST["price"]
-        category = request.POST["category"]
-        quantity = request.POST["quantity", 1]
-        if name and description and price and category:
+        # category = request.POST["category_name"]
+        quantity = request.POST["quantity"]
+        if name and description and price:
             Product.objects.create(
                 name=name,
                 description=description,
                 price=price,
-                category=category,
+                # category=category,
                 quantity=quantity,
             )
-            return redirect("product_list")
+            return redirect("home")
     return render(request, "create-update.html")
 
 
-# Mahsulotni tahrirlash
-def product_update(request, id):
+def update(request, id):
     product = Product.objects.get(id=id)
     context = {
         "product": product,
@@ -43,19 +41,18 @@ def product_update(request, id):
         product.description = request.POST["description"]
         product.price = request.POST["price"]
         product.category = request.POST["category"]
-        product.quantity = request.POST["quantity", 1]
+        product.quantity = request.POST["quantity"]
         product.save()
-        return redirect("product_list")
+        return redirect("home")
     return render(request, "create-update.html", context)
 
 
-# Mahsulotni o'chirish
-def product_delete(request, id):
+def delete(request, id):
     product = Product.objects.get(id=id)
     context = {
         "product": product,
     }
     if request.method == "POST":
         product.delete()
-        return redirect("product_list")
+        return redirect("home")
     return render(request, "delete.html", context)

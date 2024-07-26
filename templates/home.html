@@ -7,13 +7,13 @@
   </head>
   <body>
     <h1>Mahsulotlar</h1>
-    <a href="{% url 'product_create' %}">Yangi mahsulot qo'shish</a>
+    <a href="{% url 'create' %}">Yangi mahsulot qo'shish</a>
     <ul>
       {% for product in products %}
       <li>
         {{ product.name }} - {{ product.price }} UZS
-        <a href="{% url 'product_update' product.pk %}">Tahrirlash</a>
-        <a href="{% url 'product_delete' product.pk %}">O'chirish</a>
+        <a href="{% url 'update'  %}">Tahrirlash</a>
+        <a href="{% url 'delete'  %}">O'chirish</a>
       </li>
       {% endfor %}
     </ul>
