@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mahsulotni o'chirish</title>
+  </head>
+  <body>
+    <h1>Mahsulotni o'chirish</h1>
+    <p>{{ product.name }} mahsulotini o'chirishga aminmisiz?</p>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit">O'chirish</button>
+    </form>
+    <a href="{% url 'product_list' %}">Orqaga</a>
+  </body>
+</html>

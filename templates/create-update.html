@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mahsulot shakli</title>
+  </head>
+  <body>
+    <h1>Mahsulot shakli</h1>
+    <form method="post">
+      {% csrf_token %}
+      <label for="name">Nomi:</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        value="{{ product.name|default_if_none:'' }}"
+      />
+      <br />
+      <label for="name">Category:</label>
+      <input
+        type="text"
+        id="name"
+        name="category"
+        value="{{ product.category|default_if_none:'' }}"
+      />
+      <br />
+      <label for="description">Tavsifi:</label>
+      <textarea id="description" name="description">
+{{ product.description|default_if_none:'' }}</textarea
+      >
+      <br />
+      <label for="price">Narxi:</label>
+      <input
+        type="text"
+        id="price"
+        name="price"
+        value="{{ product.price|default_if_none:'' }}"
+      />
+      <br />
+      <label for="price">Miqdori:</label>
+      <input
+        type="text"
+        id="price"
+        name="quantity"
+        value="{{ product.quantity|default_if_none:'' }}"
+      />
+      <br />
+
+      <br />
+      <button type="submit">Saqlash</button>
+    </form>
+    <a href="{% url 'product_list' %}">Orqaga</a>
+  </body>
+</html>
