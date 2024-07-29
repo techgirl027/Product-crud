@@ -5,27 +5,35 @@ from .models import Product, ProductEnter, Category
 
 # Mahsulotlar ro'yxati
 def home(request):
-    products = Product.objects.all()
+    productenters = ProductEnter.objects.all()
     context = {
-        "products": products,
+        "products": productenters,
     }
     return render(request, "home.html", context)
 
 
+def productenter_detail(request, generete_id):
+    productenter = ProductEnter.objects.get(generete_id=generete_id)
+    context = {
+        "productenter": productenter,
+    }
+    return render(request, "create-update.html", context)
+
+
 def create(request):
     if request.method == "POST":
+        product_id = request.POST.get("product")
         name = request.POST["name"]
         description = request.POST["description"]
         price = request.POST["price"]
-        # category = request.POST["category_name"]
         quantity = request.POST["quantity"]
         if name and description and price:
             Product.objects.create(
                 name=name,
                 description=description,
                 price=price,
-                # category=category,
                 quantity=quantity,
+                product_id=product_id,
             )
             return redirect("home")
     return render(request, "create-update.html")
@@ -40,7 +48,6 @@ def update(request, id):
         product.name = request.POST["name"]
         product.description = request.POST["description"]
         product.price = request.POST["price"]
-        product.category = request.POST["category"]
         product.quantity = request.POST["quantity"]
         product.save()
         return redirect("home")
