@@ -28,7 +28,7 @@ def create(request):
         price = request.POST["price"]
         quantity = request.POST["quantity"]
         if name and description and price:
-            Product.objects.create(
+            ProductEnter.objects.create(
                 name=name,
                 description=description,
                 price=price,
@@ -40,7 +40,7 @@ def create(request):
 
 
 def update(request, id):
-    product = Product.objects.get(id=id)
+    product = ProductEnter.objects.get(id=id)
     context = {
         "product": product,
     }
@@ -55,7 +55,7 @@ def update(request, id):
 
 
 def delete(request, id):
-    product = Product.objects.get(id=id)
+    product = ProductEnter.objects.get(id=id)
     context = {
         "product": product,
     }
